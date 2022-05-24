@@ -1,6 +1,5 @@
 package ru.netology.test;
 
-import com.codeborne.selenide.Condition;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,8 +7,6 @@ import ru.netology.data.Data;
 import ru.netology.page.DashboardPage;
 import ru.netology.page.LoginPage;
 
-import static com.codeborne.selenide.Selectors.withText;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -65,8 +62,12 @@ public class MoneyTransferTest {
         var TransferPage = DashboardPage.firstCard();
         var cardInfo = Data.getSecondCardInfo();
         TransferPage.transferCard(cardInfo, amount);
-        Data.increaseBalance(FirstCardBalance, amount);
-        Data.decreaseBalance(SecondCardBalance, amount);
+        int FirstCardAfterTransferBalance = Data.increaseBalance(FirstCardBalance, amount);
+        int SecondCardAfterTransferBalance = Data.decreaseBalance(SecondCardBalance, amount);
+        int FirstCardBalanceAfter = DashboardPage.getFirstCardBalance();
+        int SecondCardBalanceAfter = DashboardPage.getSecondCardBalance();
+        assertEquals(FirstCardAfterTransferBalance, FirstCardBalanceAfter);
+        assertEquals(SecondCardAfterTransferBalance, SecondCardBalanceAfter);
 //        TransferPage.transferMoneyError();
     }
 }
