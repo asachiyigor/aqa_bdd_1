@@ -56,18 +56,12 @@ public class MoneyTransferTest {
 
     @Test
     void shouldNotTransferMoneyAndShowErrorWhenAmountIsMoreThanAvailableBalance() {
-        int amount = 20000;
-        int firstCardBalance = DashboardPage.getFirstCardBalance();
-        int secondCardBalance = DashboardPage.getSecondCardBalance();
+        int amount = 15000;
+        DashboardPage.getFirstCardBalance();
+        DashboardPage.getSecondCardBalance();
         var transferPage = DashboardPage.firstCard();
         var cardInfo = Data.getSecondCardInfo();
         transferPage.transferCard(cardInfo, amount);
-        int firstCardAfterTransferBalance = Data.increaseBalance(firstCardBalance, amount);
-        int secondCardAfterTransferBalance = Data.decreaseBalance(secondCardBalance, amount);
-        int firstCardBalanceAfter = DashboardPage.getFirstCardBalance();
-        int secondCardBalanceAfter = DashboardPage.getSecondCardBalance();
-        assertEquals(firstCardAfterTransferBalance, firstCardBalanceAfter);
-        assertEquals(secondCardAfterTransferBalance, secondCardBalanceAfter);
-//        TransferPage.transferMoneyError();
+        transferPage.transferMoneyError();
     }
 }
