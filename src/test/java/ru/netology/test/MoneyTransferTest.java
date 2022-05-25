@@ -25,49 +25,49 @@ public class MoneyTransferTest {
     @Test
     void shouldTransferMoneyFromFirstCardToSecond() {
         int amount = 5000;
-        int FirstCardBalance = DashboardPage.getFirstCardBalance();
-        int SecondCardBalance = DashboardPage.getSecondCardBalance();
-        var TransferPage = DashboardPage.secondCard();
+        int firstCardBalance = DashboardPage.getFirstCardBalance();
+        int secondCardBalance = DashboardPage.getSecondCardBalance();
+        var transferPage = DashboardPage.secondCard();
         var cardInfo = Data.getFirstCardInfo();
-        TransferPage.transferCard(cardInfo, amount);
-        int FirstCardAfterTransferBalance = Data.decreaseBalance(FirstCardBalance, amount);
-        int SecondCardAfterTransferBalance = Data.increaseBalance(SecondCardBalance, amount);
-        int FirstCardBalanceAfter = DashboardPage.getFirstCardBalance();
-        int SecondCardBalanceAfter = DashboardPage.getSecondCardBalance();
-        assertEquals(FirstCardAfterTransferBalance, FirstCardBalanceAfter);
-        assertEquals(SecondCardAfterTransferBalance, SecondCardBalanceAfter);
+        transferPage.transferCard(cardInfo, amount);
+        int firstCardAfterTransferBalance = Data.decreaseBalance(firstCardBalance, amount);
+        int secondCardAfterTransferBalance = Data.increaseBalance(secondCardBalance, amount);
+        int firstCardBalanceAfter = DashboardPage.getFirstCardBalance();
+        int secondCardBalanceAfter = DashboardPage.getSecondCardBalance();
+        assertEquals(firstCardAfterTransferBalance, firstCardBalanceAfter);
+        assertEquals(secondCardAfterTransferBalance, secondCardBalanceAfter);
     }
 
     @Test
     void shouldTransferMoneyFromSecondCardToFirst() {
         int amount = 5000;
-        int FirstCardBalance = DashboardPage.getFirstCardBalance();
-        int SecondCardBalance = DashboardPage.getSecondCardBalance();
-        var TransferPage = DashboardPage.firstCard();
+        int firstCardBalance = DashboardPage.getFirstCardBalance();
+        int secondCardBalance = DashboardPage.getSecondCardBalance();
+        var transferPage = DashboardPage.firstCard();
         var cardInfo = Data.getSecondCardInfo();
-        TransferPage.transferCard(cardInfo, amount);
-        int FirstCardAfterTransferBalance = Data.increaseBalance(FirstCardBalance, amount);
-        int SecondCardAfterTransferBalance = Data.decreaseBalance(SecondCardBalance, amount);
-        int FirstCardBalanceAfter = DashboardPage.getFirstCardBalance();
-        int SecondCardBalanceAfter = DashboardPage.getSecondCardBalance();
-        assertEquals(FirstCardAfterTransferBalance, FirstCardBalanceAfter);
-        assertEquals(SecondCardAfterTransferBalance, SecondCardBalanceAfter);
+        transferPage.transferCard(cardInfo, amount);
+        int firstCardAfterTransferBalance = Data.increaseBalance(firstCardBalance, amount);
+        int secondCardAfterTransferBalance = Data.decreaseBalance(secondCardBalance, amount);
+        int firstCardBalanceAfter = DashboardPage.getFirstCardBalance();
+        int secondCardBalanceAfter = DashboardPage.getSecondCardBalance();
+        assertEquals(firstCardAfterTransferBalance, firstCardBalanceAfter);
+        assertEquals(secondCardAfterTransferBalance, secondCardBalanceAfter);
     }
 
     @Test
     void shouldNotTransferMoneyAndShowErrorWhenAmountIsMoreThanAvailableBalance() {
         int amount = 20000;
-        int FirstCardBalance = DashboardPage.getFirstCardBalance();
-        int SecondCardBalance = DashboardPage.getSecondCardBalance();
-        var TransferPage = DashboardPage.firstCard();
+        int firstCardBalance = DashboardPage.getFirstCardBalance();
+        int secondCardBalance = DashboardPage.getSecondCardBalance();
+        var transferPage = DashboardPage.firstCard();
         var cardInfo = Data.getSecondCardInfo();
-        TransferPage.transferCard(cardInfo, amount);
-        int FirstCardAfterTransferBalance = Data.increaseBalance(FirstCardBalance, amount);
-        int SecondCardAfterTransferBalance = Data.decreaseBalance(SecondCardBalance, amount);
-        int FirstCardBalanceAfter = DashboardPage.getFirstCardBalance();
-        int SecondCardBalanceAfter = DashboardPage.getSecondCardBalance();
-        assertEquals(FirstCardAfterTransferBalance, FirstCardBalanceAfter);
-        assertEquals(SecondCardAfterTransferBalance, SecondCardBalanceAfter);
+        transferPage.transferCard(cardInfo, amount);
+        int firstCardAfterTransferBalance = Data.increaseBalance(firstCardBalance, amount);
+        int secondCardAfterTransferBalance = Data.decreaseBalance(secondCardBalance, amount);
+        int firstCardBalanceAfter = DashboardPage.getFirstCardBalance();
+        int secondCardBalanceAfter = DashboardPage.getSecondCardBalance();
+        assertEquals(firstCardAfterTransferBalance, firstCardBalanceAfter);
+        assertEquals(secondCardAfterTransferBalance, secondCardBalanceAfter);
 //        TransferPage.transferMoneyError();
     }
 }
